@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soal Essay</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 600px;
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      label {
+        font-weight: bold;
+        color: #333;
+      }
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      span {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Soal Essay</h1>
+      <form id="essayForm">
+        <div>
+          <label for="q1"
+            >1. Apa itu komputasi menurut KBBI dan bagaimana penerapannya dalam
+            sains?</label
+          ><br />
+          <textarea id="q1" name="q1" rows="4" cols="50"></textarea><br />
+          <span id="feedback1"></span>
+        </div>
+        <div>
+          <label for="q2"
+            >2. Bagaimana informatika mempengaruhi kehidupan di era Industri 4.0
+            dan Society 5.0?</label
+          ><br />
+          <textarea id="q2" name="q2" rows="4" cols="50"></textarea><br />
+          <span id="feedback2"></span>
+        </div>
+        <div>
+          <label for="q3"
+            >3. Apa yang dimaksud dengan sistem komputasional dan sebutkan
+            contoh aplikasinya yang tidak mengandung komputer?</label
+          ><br />
+          <textarea id="q3" name="q3" rows="4" cols="50"></textarea><br />
+          <span id="feedback3"></span>
+        </div>
+        <div>
+          <label for="q4"
+            >4. Jelaskan pengertian tumpukan (stack) dan antrean (queue) dalam
+            struktur data dan perbedaannya.</label
+          ><br />
+          <textarea id="q4" name="q4" rows="4" cols="50"></textarea><br />
+          <span id="feedback4"></span>
+        </div>
+        <div>
+          <label for="q5"
+            >5. Bagaimana pengaruh informatika terhadap peluang karir di
+            berbagai bidang?</label
+          ><br />
+          <textarea id="q5" name="q5" rows="4" cols="50"></textarea><br />
+          <span id="feedback5"></span>
+        </div>
+        <button type="button" onclick="checkAnswers()">Submit</button>
+      </form>
+    </div>
+
+    <script>
+      function checkAnswers() {
+        let score = 0;
+        let totalQuestions = 5;
+
+        // Kata kunci untuk setiap pertanyaan
+        const keywords = [
+          [
+            "komputasi",
+            "kbbi",
+            "penghitungan",
+            "komputer",
+            "matematika",
+            "model",
+            "simulasi",
+            "analisis",
+          ], // Kata kunci untuk pertanyaan 1
+          [
+            "informatika",
+            "industri 4.0",
+            "society 5.0",
+            "otomatisasi",
+            "mesin cerdas",
+            "internet",
+            "efisiensi",
+            "produktivitas",
+          ], // Kata kunci untuk pertanyaan 2
+          [
+            "sistem komputasional",
+            "komputasi",
+            "algoritma",
+            "pencarian",
+            "puzzle",
+            "catur",
+          ], // Kata kunci untuk pertanyaan 3
+          ["tumpukan", "stack", "antrean", "queue", "lifo", "fifo", "elemen"], // Kata kunci untuk pertanyaan 4
+          [
+            "informatika",
+            "karir",
+            "teknologi informasi",
+            "pengembang perangkat lunak",
+            "analis data",
+            "keamanan siber",
+            "rekam medis",
+            "simulasi komputer",
+            "platform pembelajaran daring",
+          ], // Kata kunci untuk pertanyaan 5
+        ];
+
+        for (let i = 1; i <= totalQuestions; i++) {
+          let answer = document.getElementById(`q${i}`).value.toLowerCase();
+          let feedback = document.getElementById(`feedback${i}`);
+          let correctKeywords = keywords[i - 1].filter((keyword) =>
+            answer.includes(keyword)
+          ).length;
+
+          let questionScore = 0;
+          if (correctKeywords >= 3) {
+            questionScore = 20;
+          } else if (correctKeywords == 2) {
+            questionScore = 10;
+          }
+
+          score += questionScore;
+
+          if (questionScore === 20) {
+            feedback.textContent = "Benar (20%)";
+            feedback.style.color = "green";
+          } else if (questionScore === 10) {
+            feedback.textContent = "Sebagian benar (10%)";
+            feedback.style.color = "orange";
+          } else {
+            feedback.textContent = "Salah (0%)";
+            feedback.style.color = "red";
+          }
+        }
+
+        alert(`Nilai Anda: ${score}`);
+      }
+    </script>
+  </body>
+</html>
